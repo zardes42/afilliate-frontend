@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+// import React,{useEffect,useState} from 'react'
 // import {useEffect} from 'react'
 
 import { Icon } from '@iconify/react';
@@ -61,8 +61,14 @@ const Value = styled.span`
 
 
 const Home = () => {
-    const[data,setData]= useState({})
-    console.log(data)
+    // const[data,setData]= useState({})
+  const data = {
+    afilliates:0,
+total_orders :0,
+completed_orders:0,
+processing_orders:0,
+
+  }
     // const setDashboard = async() => {
        
     //     try{
