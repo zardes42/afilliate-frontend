@@ -1,4 +1,6 @@
 import React,{useEffect,useState} from 'react'
+// import {useEffect} from 'react'
+
 import { Icon } from '@iconify/react';
 import styled from 'styled-components'
 import NavBar from '../components/NavBar'
@@ -6,7 +8,7 @@ import SearchBar from '../components/SearchBar'
 import AfilliateForm from '../components/AfilliateForm';
 import {DefaultTitle,DefaultContent} from '../styles/styles'
 import AfilliateList from '../components/AfilliateList';
-import axios from 'axios'
+// import axios from 'axios'
 
 const Container = styled.div`
     width: 100%;
@@ -61,19 +63,19 @@ const Value = styled.span`
 const Home = () => {
     const[data,setData]= useState({})
     console.log(data)
-    const setDashboard = async() => {
+    // const setDashboard = async() => {
        
-        try{
-            await axios.get('https://heroku-test-afilliates.herokuapp.com/api/dashboard').then(res => {
-                setData(res.data.data)
-            })
-          }
-          catch(error){
-            console.log(error.message)
+    //     try{
+    //         await axios.get('https://heroku-test-afilliates.herokuapp.com/api/dashboard').then(res => {
+    //             setData(res.data.data)
+    //         })
+    //       }
+    //       catch(error){
+    //         console.log(error.message)
       
-          }
+    //       }
       
-        }
+    //     }
     // useEffect(() => {setDashboard()},[])
 
     let iconSize = '25' ;
