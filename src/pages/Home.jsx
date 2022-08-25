@@ -74,7 +74,7 @@ const Home = () => {
           }
       
         }
-    useEffect(() => {setDashboard()},[])
+    // useEffect(() => {setDashboard()},[])
 
     let iconSize = '25' ;
     let iconColor = '#393744';
