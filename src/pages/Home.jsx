@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import NavBar from '../components/NavBar'
 import SearchBar from '../components/SearchBar'
 import AfilliateForm from '../components/AfilliateForm';
-import {DefaultHead,DefaultTitle,DefaultContent} from '../styles/styles'
+import {DefaultTitle,DefaultContent} from '../styles/styles'
 import AfilliateList from '../components/AfilliateList';
 import axios from 'axios'
 
