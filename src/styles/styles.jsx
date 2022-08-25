@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { setBackground } from '../utilities'
 
 
 export const DefaultHead = styled.h1`

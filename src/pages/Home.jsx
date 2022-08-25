@@ -25,7 +25,6 @@ width: 100%;
 const Section = styled.div`
     margin-bottom:40px;
 `
-const Head = styled(DefaultHead)``
 const Title = styled(DefaultTitle)``
 const Content = styled(DefaultContent)``
 const Card = styled.div` 
