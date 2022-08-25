@@ -21,11 +21,15 @@ const Badge = styled(DefaultBadge)``
 const AfilliateList = () => {
     const [AfilliateList,setAfilliateList] = useState([])
     const getData = async() => {
-       await axios.get('https://heroku-test-afilliates.herokuapp.com/api/all_members',).then((res) => {
-            setAfilliateList(res.data.data);
+        try{
 
+       await axios.get('https://heroku-test-afilliates.herokuapp.com/api/all_members',).then((res) => {
+        setAfilliateList(res.data);
         })
 
+    }catch(e){
+        console.log(e.message)
+    }
 
     }
 
@@ -37,10 +41,10 @@ const AfilliateList = () => {
   return (
    <Container>
         <Head>Current Afilliates</Head>
-        <Title>You currently have <Badge>{AfilliateList.length  }</Badge>  afilliate members.</Title>
+        <Title>You currently have <Badge>{AfilliateList.length}</Badge>  afilliate members.</Title>
         <Content>
             {AfilliateList.map((user,i) => (
-                <AfilliateListItem key={user.ID} user={user} index={i} />
+                <AfilliateListItem key={user._id} user={user} index={i} />
             ))}
         </Content>
    </Container>

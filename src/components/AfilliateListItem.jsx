@@ -41,10 +41,10 @@ const AfilliateListItem = ({user,index}) => {
         <Icon icon="bx:user"  width="30" height="30" color="#393744"/>
         </IconContainer>
         <InfoContainer>
-            <Info>{Capitalize(first_name)} {Capitalize(last_name)}</Info>
-            <Info>{Capitalize(church)}</Info>
+            <Info>{Capitalize(first_name) || ''} {Capitalize(last_name) || ''}</Info>
+            <Info>{Capitalize(church) || ''}</Info>
             <Info>{code}</Info>
-            <Info>{removeTimeStamp(date_created)}</Info>
+            <Info>{removeTimeStamp(date_created) || ''}</Info>
         </InfoContainer>
     </Container>
   )
