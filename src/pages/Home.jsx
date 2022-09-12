@@ -1,5 +1,4 @@
-// import React,{useEffect,useState} from 'react'
-// import {useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 
 import { Icon } from '@iconify/react';
 import styled from 'styled-components'
@@ -8,7 +7,8 @@ import SearchBar from '../components/SearchBar'
 import AfilliateForm from '../components/AfilliateForm';
 import {DefaultTitle,DefaultContent} from '../styles/styles'
 import AfilliateList from '../components/AfilliateList';
-// import axios from 'axios'
+import Loader from '../components/Loader';
+import axios from 'axios'
 
 const Container = styled.div`
     width: 100%;
@@ -61,35 +61,41 @@ const Value = styled.span`
 
 
 const Home = () => {
-    // const[data,setData]= useState({})
-  const data = {
-    afilliates:0,
-total_orders :0,
-completed_orders:0,
-processing_orders:0,
+    const[data,setData]= useState({})
+    const [isLoading,setisLoading] = useState(false)
+    
 
-  }
-    // const setDashboard = async() => {
+        
+    
+    
+  
+    const setDashboard = async() => {
        
-    //     try{
-    //         await axios.get('https://heroku-test-afilliates.herokuapp.com/api/dashboard').then(res => {
-    //             setData(res.data.data)
-    //         })
-    //       }
-    //       catch(error){
-    //         console.log(error.message)
+        try{
+            await axios.get('https://heroku-test-afilliates.herokuapp.com/api/dashboard').then(res => {   
+            setData(res.data)
+            })
+          }
+          catch(error){
+            console.log(error.message)
       
-    //       }
+          }
       
-    //     }
-    // useEffect(() => {setDashboard()},[])
+        }
+    useEffect(() => {setDashboard()},[])
 
     let iconSize = '25' ;
     let iconColor = '#393744';
 
+const handleLoading =(value) => {
+    setisLoading(value)
 
-  return (
+}
+
+
+return (
     <Container>
+       {isLoading ? <Loader /> : ''}
         <NavBar />
         <Body>
             <SearchBar />
@@ -103,7 +109,7 @@ processing_orders:0,
                                 <Icon icon="bi:person"  width="25" height="25" color="#393744" />
                             </Top>
                             <Bottom>
-                                <Value>{data.afilliates}</Value>
+                                <Value>{data ? data.afilliates : 0}</Value>
                             </Bottom>
                         </CardInfo>
                     </Card>
@@ -114,7 +120,7 @@ processing_orders:0,
                                 <Icon icon="eva:shopping-cart-outline"  width={iconSize} height={iconSize} color={iconColor} />
                             </Top>
                             <Bottom>
-                                <Value>{data.total_orders}</Value>
+                                <Value>{data ? data.total_orders :0}</Value>
                             </Bottom>
                         </CardInfo>
                     </Card>
@@ -125,7 +131,7 @@ processing_orders:0,
                                 <Icon icon="ic:round-done"  width={iconSize} height={iconSize} color={iconColor} />
                             </Top>
                             <Bottom>
-                                <Value>{data.completed_orders}</Value>
+                                <Value>{data ? data.completed_orders :0}</Value>
                             </Bottom>
                         </CardInfo>
                     </Card>
@@ -136,7 +142,7 @@ processing_orders:0,
                                 <Icon icon="uim:process"  width={iconSize} height={iconSize} color={iconColor} />
                             </Top>
                             <Bottom>
-                                <Value>{data.processing_orders}</Value>
+                                <Value>{data ? data.processing_orders :0}</Value>
                             </Bottom>
                         </CardInfo>
                     </Card>
@@ -145,7 +151,7 @@ processing_orders:0,
             <Section>
                 <Title>Add New Afilliate</Title>
                 <Content>
-                    <AfilliateForm />
+                    <AfilliateForm handleLoading={handleLoading} isLoading={isLoading} />
                 </Content>
             </Section>
             <Section>

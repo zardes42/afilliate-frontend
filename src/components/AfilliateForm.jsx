@@ -2,6 +2,7 @@ import React,{ useState} from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
+
 const Container = styled.div`
     width: 100%;
     background-color: rgba(255, 255, 255, 0.503);
@@ -17,8 +18,6 @@ const InputContainer = styled.div`
     /* margin-bottom: 5px; */
     padding: 30px 0px;
 `
-
-
 const Input = styled.input`
     color:#393744 ;
     width:60%;
@@ -52,6 +51,7 @@ const Submit = styled.button`
     background-color: rgb(0, 0, 0);
     font-size:20px;
     font-weight: 400;
+    cursor: pointer;
 
 `
 const Button = styled.button`
@@ -60,6 +60,7 @@ const Button = styled.button`
     background-color:transparent;
     border: 1px solid #393744;
     border-radius: 20px;
+    cursor: pointer;
     `
 const CodeContainer = styled.div`
         display: flex;
@@ -72,13 +73,15 @@ const Code = styled.p`
         font-size:25px;
 `
 const Error = styled.p`
-    color: red;
+    /* color: red; */
     margin-top:10px;
 `
-const AfilliateForm = () => {
-    // GET CODE FROM SERVER
-    const[error,setError] = useState('');
+const AfilliateForm = ({handleLoading}) => {
+    const[message,setMessage] = useState('');
     const[code,setCode] = useState('');
+    
+    
+    // GET CODE FROM SERVER
     const getCode = async(e) => {
         e.preventDefault();
         try{
@@ -87,7 +90,7 @@ const AfilliateForm = () => {
             })
           }
           catch(error){
-            setError(error.message)
+            setMessage(error.message)
       
           }
       
@@ -100,11 +103,10 @@ const AfilliateForm = () => {
        let  church = e.target['church'].value.trim()
 
        if (first_name=== ''||last_name=== ''||church=== ''||code === '' ) {
-            setError('All fields are required..')
+            setMessage('All fields are required..')
 
        }else{
-
-       
+        handleLoading(true)
        try{
            
            axios.post('https://heroku-test-afilliates.herokuapp.com/api/new_user',{
@@ -113,11 +115,13 @@ const AfilliateForm = () => {
                church,
                code
             }).then(response =>{
-                console.log(response.data)
+                setMessage(response.data.message)
+                handleLoading(false)
             })
             
         }catch(error){
-            console.error(error)
+            setMessage(error.message)
+            handleLoading(false)
         }
     }
         
@@ -148,7 +152,9 @@ const AfilliateForm = () => {
                 <Code>{code}</Code>   
             </CodeContainer>
             <InputContainer>
-            <Submit type='submit' form='afilliate_create_form'>Submit</Submit><Error>{error}</Error>
+            <Submit type='submit' form='afilliate_create_form' >Submit</Submit>{message && <Error>{message}</Error>}
+            
+
             </InputContainer>
             
             
