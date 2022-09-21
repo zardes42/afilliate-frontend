@@ -7,7 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
   background : linear-gradient(to right,#E2E2EE , #e6e6f2a9);
-  
 }
 *{
   margin: 0;

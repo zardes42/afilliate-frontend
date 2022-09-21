@@ -4,6 +4,7 @@ import {DefaultTitle} from '../styles/styles'
 import {removeTimeStamp,Capitalize} from '../utilities/'
 
 import { Icon } from '@iconify/react';
+import { mobile } from "../responsive";
 
 
 const Container = styled.div`
@@ -22,17 +23,23 @@ const IconContainer = styled.div``
 const InfoContainer = styled.div`
     display:flex;
     flex:2;
-    /* background-color:blue; */
     justify-content:space-between;
+
+${mobile({justifyContent:'space-around',gap:'50px'})}
+
     
 `
 const Info = styled(DefaultTitle)`
     font-size:16px;
+    display:flex;
+    justify-content:center;
+    width: 100px;
     margin-bottom: 0px;
+
 `
 
 const AfilliateListItem = ({user,index}) => {
-    const {first_name, last_name,church,code,date_created} = user
+    const {first_name, last_name,church,code,date_created,sales_made} = user
 
     
   return (
@@ -42,8 +49,9 @@ const AfilliateListItem = ({user,index}) => {
         </IconContainer>
         <InfoContainer>
             <Info>{Capitalize(first_name) || ''} {Capitalize(last_name) || ''}</Info>
-            <Info>{Capitalize(church) || ''}</Info>
             <Info>{code}</Info>
+            <Info>{sales_made || 0}</Info>
+            <Info>{Capitalize(church) || ''}</Info>
             <Info>{removeTimeStamp(date_created) || ''}</Info>
         </InfoContainer>
     </Container>

@@ -1,6 +1,7 @@
 import React,{ useState} from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { mobile } from "../responsive";
 
 
 const Container = styled.div`
@@ -8,25 +9,29 @@ const Container = styled.div`
     background-color: rgba(255, 255, 255, 0.503);
     padding:0 20px;
     border-radius: 10px;
+${mobile({width:'90vw'})}
+
     
 `
 const InputContainer = styled.div`
     width:100%;
-    /* background-color:red; */
     display:flex;
     flex-direction:column;
-    /* margin-bottom: 5px; */
     padding: 30px 0px;
+${mobile({padding: '20px 0'})}
+
 `
 const Input = styled.input`
     color:#393744 ;
     width:60%;
     height: 30px;
-    font-size:16px;
+    
     padding: 10px;
     background-color:transparent;
     border: 1px solid gray;
     border-radius:30px;
+${mobile({padding: '5px 5px 5px 20px',width:'90%'})}
+
 
 
     &::placeholder{
@@ -41,6 +46,9 @@ const Input = styled.input`
     `
 const Label = styled.label`
     margin-bottom: 25px;
+${mobile({marginBottom:'10px'})}
+
+    
 `
 const Submit = styled.button`
     max-width:200px;

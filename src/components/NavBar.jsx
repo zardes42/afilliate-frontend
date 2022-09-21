@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
+import { mobile } from "../responsive";
 
 
 
@@ -10,6 +11,9 @@ width: 100px;
 height: 100vh;
 display: flex;
 justify-content: center;
+position:fixed;
+${mobile({display :'none'})}
+
 
     
 `

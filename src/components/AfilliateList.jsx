@@ -15,6 +15,31 @@ const Content = styled(DefaultContent)`
    
 `
 const Badge = styled(DefaultBadge)``
+const TableHeader = styled.div`
+ display:flex;
+    align-items:center;
+    max-width:800px;
+    padding:10px 50px 0px 30px;
+    
+`
+const Info = styled.div`
+    display:flex;
+    justify-content:center;
+    text-align:center;
+    align-items:center; 
+    font-size:20px;
+    width: 100px;
+    margin-bottom: 0px;
+`
+ const LeftContainer = styled.div`
+ width: 80px;
+    
+    `
+ const RightContainer = styled.div`
+    display:flex;
+    flex:2;
+    justify-content:space-between;
+ `
 
 
 
@@ -36,13 +61,26 @@ const AfilliateList = () => {
     useEffect(() => {
         getData()
 
-    },[])
+    },[AfilliateList])
 
   return (
    <Container>
         <Head>Current Afilliates</Head>
         <Title>You currently have <Badge>{AfilliateList.length}</Badge>  afilliate members.</Title>
         <Content>
+            <TableHeader>
+                <LeftContainer>
+               {''}
+                </LeftContainer>
+                <RightContainer>
+
+                    <Info>Name</Info>
+                    <Info>Code</Info>
+                    <Info>Sales </Info>
+                    <Info>Church</Info>
+                    <Info>Date Joined </Info>
+                </RightContainer>
+            </TableHeader>
             {AfilliateList.map((user,i) => (
                 <AfilliateListItem key={user._id} user={user} index={i} />
             ))}

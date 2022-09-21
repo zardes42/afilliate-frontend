@@ -1,6 +1,11 @@
 
 export const removeTimeStamp = (str) =>{
-    return str.split('T')[0];
+    if(str){
+        return str.split('T')[0];
+    }
+    else{
+        return ''
+    }
 }
 export const Capitalize = (str) =>{
 
