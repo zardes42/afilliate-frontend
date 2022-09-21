@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import {DefaultHead,DefaultTitle,DefaultContent,DefaultBadge} from '../styles/styles'
 import axios from 'axios'
 import AfilliateListItem from './AfilliateListItem'
+import { mobile } from "../responsive";
+
 
 
 
@@ -32,13 +34,23 @@ const Info = styled.div`
     margin-bottom: 0px;
 `
  const LeftContainer = styled.div`
+ display:block;
+ background-color: red;
  width: 80px;
+ &:after { 
+    content:'';
+    display:block;
+ background-color: red;
+ width: 80px;
+ }
     
     `
  const RightContainer = styled.div`
     display:flex;
     flex:2;
     justify-content:space-between;
+${mobile({justifyContent:'space-around',gap:'50px'})}
+
  `
 
 
@@ -73,7 +85,6 @@ const AfilliateList = () => {
                {''}
                 </LeftContainer>
                 <RightContainer>
-
                     <Info>Name</Info>
                     <Info>Code</Info>
                     <Info>Sales </Info>

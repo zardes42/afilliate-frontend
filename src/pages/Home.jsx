@@ -131,7 +131,7 @@ return (
                                 <Icon icon="bi:person"  width={iconSize} height={iconSize} color={iconColor} />
                             </Top>
                             <Bottom>
-                                <Value>{data ? data.afilliates : 'n/a'}</Value>
+                                <Value>{data ? data.afilliates : 0}</Value>
                             </Bottom>
                         </CardInfo>
                     </Card>

@@ -18,16 +18,14 @@ const Container = styled.div`
     border-radius: 13px;
 
 
-    `
+`
 const IconContainer = styled.div``
 const InfoContainer = styled.div`
     display:flex;
     flex:2;
     justify-content:space-between;
 
-${mobile({justifyContent:'space-around',gap:'50px'})}
-
-    
+${mobile({justifyContent:'space-around', gap:'50px'})}    
 `
 const Info = styled(DefaultTitle)`
     font-size:16px;
@@ -35,7 +33,6 @@ const Info = styled(DefaultTitle)`
     justify-content:center;
     width: 100px;
     margin-bottom: 0px;
-
 `
 
 const AfilliateListItem = ({user,index}) => {
