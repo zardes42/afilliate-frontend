@@ -8,8 +8,10 @@ import AfilliateForm from '../components/AfilliateForm';
 import {DefaultTitle,DefaultContent} from '../styles/styles'
 import AfilliateList from '../components/AfilliateList';
 import Loader from '../components/Loader';
-import axios from 'axios'
 import { mobile } from "../responsive";
+import {Navigate} from 'react-router-dom'
+import {axiosAuth} from '../axios'
+
 
 const Container = styled.div`
 
@@ -17,10 +19,6 @@ const Container = styled.div`
     display: flex;
     background-color:rgba(255, 255, 255, 0.212);
 ${mobile({width:'100vw'})}
-
-    
-
-
 `
 const Body = styled.div`
 display: flex;
@@ -28,8 +26,8 @@ flex-direction: column;
 width: inherit;
 margin-left: 120px;
 ${mobile({padding:'0 10px',margin:'0',width:'100vw',overflow: 'hidden'})}
-
 `
+
 const Section = styled.div`
     display: flex;
     flex-direction: column;
@@ -49,7 +47,6 @@ const CardsContainer = styled.div`
     flex-wrap: wrap;
     ${mobile({justifyContent: 'flex-start',padding:'0 10px'})}
 ` 
-
 const Card = styled.div` 
     width: 200px;
     height: 150px;
@@ -86,14 +83,16 @@ const Value = styled.span`
 `
 
 
-const Home = () => {
+const Home = ({setAuthorized,authorized}) => {
     const[data,setData]= useState({})
     const [isLoading,setisLoading] = useState(false)
  
     const setDashboard = async() => {
        
         try{
-            await axios.get('https://heroku-test-afilliates.herokuapp.com/api/dashboard').then(res => {   
+            await axiosAuth.get('https://heroku-test-afilliates.herokuapp.com/api/dashboard',{headers:{
+                "x-access-token" : sessionStorage.getItem("accessToken")
+            }}).then(res => {   
             setData(res.data)
             })
           }
@@ -103,7 +102,7 @@ const Home = () => {
           }
       
         }
-    useEffect(() => {setDashboard()},[data])
+    useEffect(() => {setDashboard()},[])
 
     let iconSize = '25' ;
     let iconColor = '#393744';
@@ -112,14 +111,31 @@ const handleLoading =(value) => {
     setisLoading(value)
 
 }
+const handleLogout = async() => {
+    try{
+        axiosAuth.post('./auth/logout',{token:localStorage.getItem('refreshToken')}).then(res => {
+            console.log(res.data)
+            if(res.data.status){
+                sessionStorage.removeItem('accessToken')
+                sessionStorage.removeItem("refreshToken")
+                setAuthorized(false)
+                
+            }
+        })
+    }catch(e){
+        console.log('error logging out user..',e.message)
+    }
+}
 
-
+if (!authorized) {
+    return <Navigate to='/login' />
+  }
 return (
     <Container>
        {isLoading ? <Loader /> : ''}
         <NavBar />
         <Body>
-            <SearchBar />
+            <SearchBar handleLogout={handleLogout} />
             <Section>
                 <Title>Actions available</Title>
                 <Content>

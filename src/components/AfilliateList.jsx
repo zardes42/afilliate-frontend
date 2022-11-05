@@ -1,7 +1,7 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import styled from 'styled-components'
 import {DefaultHead,DefaultTitle,DefaultContent,DefaultBadge} from '../styles/styles'
-import axios from 'axios'
+import {axiosAuth} from '../axios'
 import AfilliateListItem from './AfilliateListItem'
 import { mobile } from "../responsive";
 
@@ -35,12 +35,12 @@ const Info = styled.div`
 `
  const LeftContainer = styled.div`
  display:block;
- background-color: red;
+ /* background-color: red; */
  width: 80px;
  &:after { 
     content:'';
     display:block;
- background-color: red;
+ /* background-color: red; */
  width: 80px;
  }
     
@@ -60,7 +60,7 @@ const AfilliateList = () => {
     const getData = async() => {
         try{
 
-       await axios.get('https://heroku-test-afilliates.herokuapp.com/api/all_members',).then((res) => {
+       await axiosAuth.get('/all_members',).then((res) => {
         setAfilliateList(res.data);
         })
 
@@ -69,7 +69,6 @@ const AfilliateList = () => {
     }
 
     }
-
     useEffect(() => {
         getData()
 

@@ -18,6 +18,9 @@ ${mobile({justifyContent:'flex-start',gap:'20px',cursor:'pointer'})}
 `
 const LeftContainer = styled.div`
     padding:10px 0px;
+    display: flex;
+    align-items:center;
+    gap:20px;
 
 
 
@@ -26,50 +29,31 @@ const Title = styled.h1`
 font-size:1.6em;
 
 `
-const SearchContainer = styled.div`
-    display: flex;
-    justify-content:space-around;
-    gap: 10px;
-    align-items:center;
-    padding:10px;
-    background-color:#fff;
-    border: 1px solid #fff;
-    border-radius: 30px;
-${mobile({
-})}
-
-    `
-
-const Input = styled.input`
-    border: none;
-    color:#393744 ;
-    font-size:16px;
-${mobile({display: 'none'})}
-
-    &::placeholder{
-        color:rgba(0, 0, 0, 0.5);
-    }
-    &:active,:focus {
-        border: none;
-        outline: none;
-
-    }
+const IconContainer = styled.div`
+display: flex;
+align-items:center;
+cursor:pointer;
 
 
-    `
+    transition: all .8s ease-in-out;
     
+    &:hover{
+        transform: scale(.9);
+    }
+`
 
 
-const SearchBar = () => {
+
+const SearchBar = ({handleLogout}) => {
   return (
     <Container>
         <LeftContainer>
         <Title>Dashboard</Title>
+        <IconContainer onClick={()=>{handleLogout()}}>
+                <Icon icon="fe:logout" color="#393744" width="25" height="25" />
+                </IconContainer>
         </LeftContainer>
-            <SearchContainer>
-                <Icon icon="akar-icons:search" color="#393744" width="16" height="16" />
-                <Input placeholder="Search" />
-            </SearchContainer>
+           
     </Container>
   )
 }

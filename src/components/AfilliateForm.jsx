@@ -1,7 +1,9 @@
 import React,{ useState} from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
+import {axiosAuth} from '../axios'
 import { mobile } from "../responsive";
+import {DefaultInputContainer,DefaultInput,DefaultLabel} from '../styles/styles'
+
 
 
 const Container = styled.div`
@@ -13,43 +15,9 @@ ${mobile({width:'90vw'})}
 
     
 `
-const InputContainer = styled.div`
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    padding: 30px 0px;
-${mobile({padding: '20px 0'})}
-
-`
-const Input = styled.input`
-    color:#393744 ;
-    width:60%;
-    height: 30px;
-    
-    padding: 10px;
-    background-color:transparent;
-    border: 1px solid gray;
-    border-radius:30px;
-${mobile({padding: '5px 5px 5px 20px',width:'90%'})}
-
-
-
-    &::placeholder{
-        color:rgba(0, 0, 0, 0.5);
-    }
-    &:active,:focus {
-        outline: none;
-
-    }
-
-
-    `
-const Label = styled.label`
-    margin-bottom: 25px;
-${mobile({marginBottom:'10px'})}
-
-    
-`
+const InputContainer = styled(DefaultInputContainer)``
+const Input = styled(DefaultInput)``
+const Label = styled(DefaultLabel)``
 const Submit = styled.button`
     max-width:200px;
     border-radius: 20px;
@@ -81,7 +49,6 @@ const Code = styled.p`
         font-size:25px;
 `
 const Error = styled.p`
-    /* color: red; */
     margin-top:10px;
 `
 const AfilliateForm = ({handleLoading}) => {
@@ -93,7 +60,9 @@ const AfilliateForm = ({handleLoading}) => {
     const getCode = async(e) => {
         e.preventDefault();
         try{
-            await axios.get('https://heroku-test-afilliates.herokuapp.com/api/new_code').then(res => {
+            await axiosAuth.get('https://heroku-test-afilliates.herokuapp.com/api/new_code',{headers:{
+                "x-access-token" : sessionStorage.getItem("accessToken")
+            }}).then(res => {
                 setCode(res.data)
             })
           }
@@ -104,7 +73,7 @@ const AfilliateForm = ({handleLoading}) => {
       
         }
 
-    const handleSubmit =(e) => {
+    const handleFormSubmit =(e) => {
         e.preventDefault();
        let first_name = e.target['first_name'].value.trim()
        let last_name = e.target['last_name'].value.trim()
@@ -117,7 +86,7 @@ const AfilliateForm = ({handleLoading}) => {
         handleLoading(true)
        try{
            
-           axios.post('https://heroku-test-afilliates.herokuapp.com/api/new_user',{
+           axiosAuth.post('/new_user',{
                first_name,
                last_name,
                church,
@@ -141,7 +110,7 @@ const AfilliateForm = ({handleLoading}) => {
     
   return (
     <Container>
-        <form id="afilliate_create_form" onSubmit={(e)=>{handleSubmit(e)}} >
+        <form id="afilliate_create_form" onSubmit={(e)=>{handleFormSubmit(e)}} >
             <InputContainer>
                 <Label htmlFor="first_name" >First Name</Label>
                 <Input id= 'first_name' type="text"  name="first_name"/>

@@ -50,7 +50,7 @@ const NavBar = () => {
 
             element.classList.toggle('active')
         }
-        console.log(e.currentTarget.classList)
+        
     }
   return (
         <Container>
