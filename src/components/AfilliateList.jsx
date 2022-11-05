@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useRef} from 'react'
+import React,{useEffect,useState} from 'react'
 import styled from 'styled-components'
 import {DefaultHead,DefaultTitle,DefaultContent,DefaultBadge} from '../styles/styles'
 import {axiosAuth} from '../axios'
